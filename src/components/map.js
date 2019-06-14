@@ -15,12 +15,12 @@ const Map = ({ geohash, setGeohash }) => {
         setGeohash(geohashInput);
     };
     return (
-        <>
-        <h3>Pretend this is a live map</h3>
+<>
+<h3>Pretend this is a live map</h3>
 
-        { geohash? `Map center ${geohash}` : ''} <br/>
+{ geohash? `Map center ${geohash}` : ''} <br/>
 
-        <img src={map}/>
+<img src={map}/>
 
 <p>
 The idea here is to simulate updates to the map due to
@@ -42,8 +42,8 @@ the new center point being sent to the real map view.
 </form>
 
 <p>
-After you navigate away and click the "Map" item in the navbar I want the map to come
-back to the same location (not the default start position) so the same URL is copied
+After you navigate away and then click the "Map" item in the navbar the map
+comes back to the same view (not the default start position) so the same URL is copied
 into the navbar to implement that.
 </p>
 
@@ -53,8 +53,7 @@ could immediate cut and paste that or bookmark the page to save the location.
 </p>
 
 </>
-    )
-}
+)}
 Map.propTypes = {
     geohash: PropTypes.string,
     setGeohash: PropTypes.func
