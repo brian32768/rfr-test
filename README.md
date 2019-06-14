@@ -31,3 +31,9 @@ The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
 
 Since this is just hackery there is no provision to test or deploy.
+
+## Disclaimer
+
+I make no assertions about "best practices"!! I'm learning everyday.
+If you learn something by looking at this code, great.
+Teach me by sending comments! -- Brian
