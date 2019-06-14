@@ -1,14 +1,16 @@
-This project is currently contains my experiments with
-redux-first-router.
+This project is currently contains my experiments with redux-first-router.
 
 It has a simple navbar and lets me test jumping from one page to another
 through the navbar and using browser history.
 
-Parts of it work!
+Since my goal is a mapping app, it has a simulated map page.
 
-On the "map" page, there is a form. I want to type a "geohash" string and have
-that string copy into the URL address bar. (A history "replace" operation.
-It's not doing that yet.
+### Some of it works!
+
+On the "map" page, there is a form. Type a "geohash" string (anything!) and
+that string should copy into the URL address bar. (A history "replace" operation.
+It's not doing that yet.  It does modify the NavLink so that going to another
+page and then returning to the Map will restore the most recent location.
 
 The "User" links in the navbar are from the redux-first-router examples and
 are just hanging around right now to give me some alternative targets for
