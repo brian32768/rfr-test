@@ -5,7 +5,6 @@ export default (state = initialState, action = {}) => {
         case 'SETGEOHASH':
             console.log("SETGEOHASH to", action.payload);
             return action.payload;
-            break;
         default:
             return state
     }

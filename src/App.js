@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 // Go read this: https://github.com/faceyspacey/redux-first-router-link#readme
@@ -9,7 +10,6 @@ import * as components from './components'
 
 const App = ({ page, geohash, changeUser }) => {
   const Component = components[page]
-  console.log("App geohash=", geohash);
   return (
     <>
         <NavLink
@@ -32,16 +32,17 @@ const App = ({ page, geohash, changeUser }) => {
     </>
   )
 }
-
-const mapStateToProps = (state) => {
-    console.log("App state=", state);
-    return {
-        page: state.page,
-        geohash: state.geohash
-    }
-}
+App.propTypes = {
+    page: PropTypes.string,
+    geohash: PropTypes.string,
+    changeUser: PropTypes.func
+};
+const mapStateToProps = (state) => ({
+    page: state.page,
+    geohash: state.geohash
+});
 const mapDispatchToProps = dispatch => ({
   changeUser: id => dispatch({ type: 'USER', payload: { id } })
-})
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)

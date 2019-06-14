@@ -6,6 +6,6 @@ const User = ({ userId }) => (
 )
 
 const mapStateToProps = ({ location }) => ({
-  userId: location.payload.id
+    userId: location.payload.id
 })
 export default connect(mapStateToProps)(User)

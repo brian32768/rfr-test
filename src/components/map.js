@@ -1,24 +1,23 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { setGeohash } from '../actions'
 
 const map = require('/assets/map.jpg');
 
 // https://rangle.io/blog/simplifying-controlled-inputs-with-hooks/
 
-const Map = (props) => {
+const Map = ({ geohash, setGeohash }) => {
     const [geohashInput, updateGeohash] = useState('');
-    console.log("Map props", props);
+    console.log("Map props", geohash, setGeohash);
     const handleSubmit = (e) => {
         e.preventDefault();
-        props.setGeohash(geohashInput);
+        setGeohash(geohashInput);
     };
     return (
         <>
         <h3>Pretend this is a live map</h3>
 
-        { props.geohash? `Map center ${props.geohash}` : ''} <br/>
+        { geohash? `Map center ${geohash}` : ''} <br/>
 
         <img src={map}/> <br />
 
@@ -34,10 +33,10 @@ Map.propTypes = {
     geohash: PropTypes.string,
     setGeohash: PropTypes.func
 }
-const mapStateToProps = (state) => (
-        { geohash: state.geohash }
-)
-const mapDispatchToProps = {
-    setGeohash
-}
+const mapStateToProps = (state) => ({
+    geohash: state.geohash.geohash
+})
+const mapDispatchToProps = dispatch => ({
+  setGeohash: geohash => dispatch({ type: 'SETGEOHASH', payload: {geohash} })
+})
 export default connect(mapStateToProps, mapDispatchToProps)(Map);
