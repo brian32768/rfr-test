@@ -39,7 +39,7 @@ App.propTypes = {
 };
 const mapStateToProps = (state) => ({
     page: state.page,
-    geohash: state.geohash
+    geohash: state.geohash.geohash
 });
 const mapDispatchToProps = dispatch => ({
   changeUser: id => dispatch({ type: 'USER', payload: { id } })

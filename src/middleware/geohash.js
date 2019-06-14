@@ -1,13 +1,18 @@
+import page from '../reducers/page'
+
 const geohashMiddleware = store => {
     console.log('geohashMiddleware active');
     return next => action => {
         try {
             console.log('geohashMiddleware action', action);
             switch (action.type) {
-
+                case 'SETGEOHASH':
+                    const state = store.getState()
+                    store.dispatch({ type:"MAP", payload: action.payload.geohash }, state)
+                    break;
                 default:
                     console.log('uh geohashMiddleware action', action);
-                    break
+                    break;
             }
             return next(action)
         } catch(err) {
