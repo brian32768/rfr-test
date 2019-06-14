@@ -1,4 +1,4 @@
-const initialState = ''
+const initialState = {geohash: 'INITIAL'}
 
 export default (state = initialState, action = {}) => {
     switch (action.type) {

@@ -13,6 +13,14 @@ const App = ({ page, geohash, changeUser }) => {
   return (
     <>
         <NavLink
+            to={ '/' }
+            activeClassName='active'
+            activeStyle={{ color: 'pink' }}
+            exact={true}
+            strict={true}
+        > Home </NavLink>
+
+        <NavLink
             to={ '/map/'+ geohash }
             activeClassName='active'
             activeStyle={{ color: 'pink' }}
