@@ -13,7 +13,7 @@ const App = ({ page, geohash, changeUser }) => {
   return (
     <>
         <NavLink
-            to={ '/' }
+            to="/"
             activeClassName='active'
             activeStyle={{ color: 'pink' }}
             exact={true}
@@ -21,7 +21,7 @@ const App = ({ page, geohash, changeUser }) => {
         > Home </NavLink>
 
         <NavLink
-            to={ '/map/'+ geohash }
+            to={ '/map/' + geohash /* using an array or object here does not work for me */ }
             activeClassName='active'
             activeStyle={{ color: 'pink' }}
             exact={true}

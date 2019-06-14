@@ -8,7 +8,7 @@ const geohashMiddleware = store => {
             switch (action.type) {
                 case 'SETGEOHASH':
                     const state = store.getState()
-                    store.dispatch({ type:"MAP", payload: action.payload.geohash }, state)
+                    store.dispatch({ type:"MAP", payload: {geohash: action.payload.geohash} }, state)
                     break;
                 default:
                     console.log('uh geohashMiddleware action', action.type, action);
