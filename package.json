@@ -1,8 +1,23 @@
 {
-  "name": "redux-first-router-test",
+  "name": "rfr-test",
   "version": "0.1.0",
-  "private": true,
+  "author": "Brian H Wilson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/brian32768/rfr-test/issues"
+  },
+  "homepage": "https://github.com/brian32768/rfr-test#readme",
+  "description": "Demo/test of redux-first-router",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/brian32768/rfr-test.git"
+  },
+  "keywords": [
+    "react",
+    "redux"
+  ],
   "dependencies": {
+    "query-string": "^6.7.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "^7.1.0",
@@ -22,8 +37,7 @@
     "@babel/preset-react": "^7.0.0"
   },
   "scripts": {
-    "start": "parcel serve index.html --open",
-    "test": "react-scripts test"
+    "start": "parcel serve index.html --open"
   },
   "browserslist": {
     "production": [

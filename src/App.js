@@ -8,8 +8,9 @@ import { NavLink } from 'redux-first-router-link'
 // Import everything as an object so that we can look up a component using its name.
 import * as components from './components'
 
-const App = ({ page, geohash, changeUser }) => {
+const App = ({ page, geohash, state, changeUser }) => {
   const Component = components[page]
+  console.log("App geohash?", geohash, " state =",state);
   return (
     <>
         <NavLink
@@ -27,6 +28,17 @@ const App = ({ page, geohash, changeUser }) => {
             exact={true}
             strict={true}
         > Map </NavLink>
+
+        <NavLink
+            to={{
+                type: "MAP",
+                query:geohash?{geohash:geohash}:{}
+            }}
+            activeClassName='active'
+            activeStyle={{ color: 'pink' }}
+            exact={true}
+            strict={true}
+        > MapQ </NavLink>
 
         <NavLink to="/user/123"
             activeClassName='active'
@@ -47,7 +59,8 @@ App.propTypes = {
 };
 const mapStateToProps = (state) => ({
     page: state.page,
-    geohash: state.geohash.geohash
+    state: state,
+    geohash: (typeof state.location.query === 'undefined')? state.geohash.geohash : state.location.query.geohash,
 });
 const mapDispatchToProps = dispatch => ({
   changeUser: id => dispatch({ type: 'USER', payload: { id } })

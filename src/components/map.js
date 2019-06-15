@@ -9,9 +9,10 @@ const map = require('/assets/map.jpg');
 
 const Map = ({ geohash, setGeohash }) => {
     const [geohashInput, updateGeohash] = useState('');
-    console.log("Map render", geohash, setGeohash);
+    console.log("Map render", geohash);
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log("Map.onSumbit: setGeohash(" + geohashInput + ")");
         setGeohash(geohashInput);
     };
     return (
@@ -59,9 +60,10 @@ Map.propTypes = {
     setGeohash: PropTypes.func
 }
 const mapStateToProps = (state) => ({
-    geohash: state.geohash.geohash
+//    geohash: state.geohash.geohash
+    geohash: (typeof state.location.query === 'undefined')? '' : state.location.query.geohash
 })
 const mapDispatchToProps = dispatch => ({
-  setGeohash: geohash => dispatch({ type: 'SETGEOHASH', payload: {geohash} })
+  setGeohash: geohash => dispatch({ type: 'SETGEOHASH', payload: {query: {geohash: geohash}} })
 })
 export default connect(mapStateToProps, mapDispatchToProps)(Map);

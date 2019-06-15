@@ -1,17 +1,18 @@
 import page from '../reducers/page'
 
 const geohashMiddleware = store => {
-    console.log('geohashMiddleware active');
     return next => action => {
         try {
-            console.log('geohashMiddleware action', action.type, action);
+            const state = store.getState()
             switch (action.type) {
                 case 'SETGEOHASH':
-                    const state = store.getState()
-                    store.dispatch({ type:"MAP", payload: {geohash: action.payload.geohash} }, state)
+                    console.log('geohashMiddleware action', action.type, " action=",action, " state=",state);
+
+                    // Calling the "page" reducer here will cause the URL address to update.
+                    store.dispatch({ type:"MAP", payload: action.payload }, state)
                     break;
                 default:
-                    console.log('uh geohashMiddleware action', action.type, action);
+                    //console.log('geohashMiddleware action', action.type, action);
                     break;
             }
             return next(action)
