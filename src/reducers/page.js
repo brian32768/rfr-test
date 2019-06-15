@@ -11,8 +11,22 @@ export default (state = 'Home', action = {}) => {
     let newState = state;
     console.log("page reducer: action=", action, " old state=", state);
     // if Im leaving the MAP I should stash the geohash
-    if (state === "Map" && action.type !== "MAP") {
-        console.log("Stash the geohash==================================================");
+    if (action.type !== "MAP") {
+        // Look previous location
+        try {
+            let old_geohash;
+            if (typeof action.meta.location.prev.query !== 'undefined') {
+                old_geohash = action.meta.location.prev.query.geohash
+                console.log("page reducer: query.geohash", old_geohash);
+            } else {
+                old_geohash = action.meta.location.payload.geohash
+                console.log("page reducer: stashed.geohash", old_geohash);
+            }
+            action.payload = {...action.payload, 'geohash':old_geohash};
+            console.log('page reducer: action is now', action);
+        } catch(err) {
+            console.log("page reducer: Can't read prev geohash",action,err);
+        }
     }
     switch (action.type) {
         case "MAP":
@@ -48,15 +62,6 @@ export default (state = 'Home', action = {}) => {
             break;
 
         case "USER":
-        // how do I see the previous location here? let's try This
-            try {
-                const old_geohash = action.meta.location.prev.payload.query.geohash
-                console.log("Sadly we're leaving behind geohash", old_geohash);
-                action.payload = {...action.payload, 'geohash':old_geohash};
-                console.log('action is now', action);
-            } catch(err) {
-                console.log("Can't read prev geohash");
-            }
             newState = "User";
             break;
 

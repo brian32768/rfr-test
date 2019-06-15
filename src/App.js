@@ -60,9 +60,16 @@ App.propTypes = {
 const mapStateToProps = (state) => ({
     page: state.page,
     state: state,
-    geohash: (typeof state.location.query === 'undefined')? state.geohash.geohash : state.location.query.geohash,
+    geohash: (typeof state.location.query === 'undefined')?
+        state.location.payload.geohash : state.location.query.geohash,
 });
 const mapDispatchToProps = dispatch => ({
+
+     The action needs to have the full payload I think
+     including geohash??? Same thing goes for any action
+     so we should pull all actions out of these components
+     and into an action.js file to look at them all in one place!
+
   changeUser: id => dispatch({ type: 'USER', payload: { id } })
 });
 
