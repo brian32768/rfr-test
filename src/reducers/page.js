@@ -9,6 +9,6 @@ const components = {
 
 export default (state = 'Home', action = {}) => {
     const newState = components[action.type] || state
-    console.log("page reducer: ", action.type, " state=", state, " newState=", newState);
+    //console.log("page reducer: ", action.type, " state=", state, " newState=", newState);
     return newState
 }

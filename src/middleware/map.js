@@ -1,5 +1,4 @@
-import page from '../reducers/page'
-import { setMapQuery } from '../utils'
+import { page, setMapQuery } from '../reducers'
 
 const mapMiddleware = store => {
     return next => action => {

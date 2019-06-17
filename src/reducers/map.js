@@ -1,8 +1,23 @@
-import { getMapQuery } from '../utils'
-
 const initialState = {
     center: '', // We'd use a coord [0,0] here in real life.
     zoom: ''
+}
+
+function getMapQuery(query) {
+    // Unpack my query object into an object that I can understand.
+    // In real life, I'd convert the geohash from query to center coord here.
+    return {
+        center: query.g,
+        zoom:   query.z
+    }
+}
+export function setMapQuery(center, zoom) {
+    // Pack the reasonably named state settings into a compact querystring format
+    const query = {}
+    // In real life, I'd convert center coord to geohash here.
+    if (typeof center !== 'undefined' && center) query["g"] = center
+    if (typeof zoom !== 'undefined' && zoom)     query["z"] = zoom
+    return query
 }
 
 export default (state = initialState, action = {}) => {
