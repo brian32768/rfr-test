@@ -9,7 +9,7 @@ const mapMiddleware = store => {
                 case 'SETCENTER':
                     // Calling "page" reducer will cause the URL address to update (and push to history).
                     store.dispatch({type:"MAP",
-                        payload: { query: setMapQuery(action.payload) }
+                        payload: { query: setMapQuery(action.payload.center, action.payload.zoom) }
                     }, state)
                     break;
                 default:
