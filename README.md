@@ -33,6 +33,22 @@ You will also see lint errors in the console.
 
 Since this is just hackery there is no provision to test or deploy.
 
+### My tests
+
+Type in URL directly, parameters are "g" and "z", for examples
+
+http://localhost/map?g=HASH&z=10
+
+Try the parameters separately and together.
+
+Form entry: enter center and zoom on the form and hit submit.
+
+Navigation links: make sure the Map link gets rewritten to include parameters
+
+History: You should be able to click the nav links in any order and then unwind
+them with browser history arrows. The correct values should be restored for
+the map parameters.
+
 ## Disclaimer
 
 I make no assertions about "best practices"!! I'm learning everyday.
