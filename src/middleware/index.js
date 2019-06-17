@@ -1,2 +1,2 @@
-import geohashMiddleware from './geohash'
-export { geohashMiddleware }
+import mapMiddleware from './map'
+export { mapMiddleware }

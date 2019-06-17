@@ -1,21 +1,21 @@
 import logger from 'redux-logger'
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux'
-import { geohashMiddleware } from './middleware'
+import { mapMiddleware } from './middleware'
 
-import { geohash, title, page } from './reducers'
+import { map, title, page } from './reducers'
 import routes from './routesMap'
 
 export default function configureStore(preloadedState) {
     const { reducer, middleware, enhancer } = routes;
 
     const rootReducer = combineReducers({
-        geohash,
+        map,
         page,
         title,
         location: reducer
     })
 
-    const middlewares = applyMiddleware(middleware, geohashMiddleware, logger)
+    const middlewares = applyMiddleware(middleware, mapMiddleware, logger)
     const composeEnhancers =
         typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
         ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}) : compose

@@ -7,19 +7,21 @@ const map = require('/assets/map.jpg');
 // Check this out for tips on using "Hooks" to handle forms.
 // https://rangle.io/blog/simplifying-controlled-inputs-with-hooks/
 
-const Map = ({ geohash, setGeohash }) => {
-    const [geohashInput, updateGeohash] = useState('');
-    console.log("Map render", geohash);
+const Map = ({ center, setMapCenter, zoom, setMapZoom }) => {
+    const [mapCenterInput, updateMapCenter] = useState('');
+    const [mapZoomInput, updateMapZoom] = useState('');
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("Map.onSumbit: setGeohash(" + geohashInput + ")");
-        setGeohash(geohashInput);
+        setMapCenter(mapCenterInput);
+        setMapZoom(mapZoomInput);
     };
     return (
 <>
 <h3>Pretend this is a live map</h3>
 
-{ geohash? `Map center ${geohash}` : ''} <br/>
+{ center? `Map Center ${center}` : ''}
+{ zoom?  ` Zoom ${zoom}` : ''}
+<br/>
 
 <img src={map}/>
 
@@ -37,8 +39,10 @@ the new center point being sent to the real map view.
 </p>
 
 <form onSubmit={ handleSubmit }>
-    <label>geohash</label>
-    <input type="text" onChange={ e => updateGeohash(e.target.value) } value={ geohashInput } required/>
+    <label>Center</label>
+    <input type="text" onChange={ e => updateMapCenter(e.target.value) } value={ mapCenterInput } required/>
+    <label>Zoom</label>
+    <input type="text" onChange={ e => updateMapZoom(e.target.value) }   value={ mapZoomInput } required/>
     <button type="submit">Submit</button>
 </form>
 
@@ -56,14 +60,18 @@ could immediate cut and paste that or bookmark the page to save the location.
 </>
 )}
 Map.propTypes = {
-    geohash: PropTypes.string,
-    setGeohash: PropTypes.func
+    center: PropTypes.string,
+    setMapCenter: PropTypes.func,
+    zoom: PropTypes.string,
+    setMapZoom: PropTypes.func,
 }
 const mapStateToProps = (state) => ({
-//    geohash: state.geohash.geohash
-    geohash: (typeof state.location.query === 'undefined')? '' : state.location.query.geohash
+    center: state.map.center,
+    zoom:   state.map.zoom,
+//    geohash: (typeof state.location.query === 'undefined')? '' : state.location.query.geohash
 })
 const mapDispatchToProps = dispatch => ({
-  setGeohash: geohash => dispatch({ type: 'SETGEOHASH', payload: {query: {geohash: geohash}} })
+    setMapCenter: center => dispatch({ type: 'SETCENTER', payload: center }),
+    setMapZoom:   zoom   => dispatch({ type: 'SETZOOM',   payload: zoom }),
 })
 export default connect(mapStateToProps, mapDispatchToProps)(Map);

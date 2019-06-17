@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { setMapQuery } from './utils'
 
 // Go read this: https://github.com/faceyspacey/redux-first-router-link#readme
 import { NavLink } from 'redux-first-router-link'
@@ -8,9 +9,8 @@ import { NavLink } from 'redux-first-router-link'
 // Import everything as an object so that we can look up a component using its name.
 import * as components from './components'
 
-const App = ({ page, geohash, state, changeUser }) => {
+const App = ({ page, center, zoom, state, changeUser }) => {
   const Component = components[page]
-  console.log("App geohash?", geohash, " state =",state);
   return (
     <>
         <NavLink
@@ -22,23 +22,12 @@ const App = ({ page, geohash, state, changeUser }) => {
         > Home </NavLink>
 
         <NavLink
-            to={ '/map/' + geohash /* using an array or object here does not work for me */ }
+            to={{type: "MAP", query: setMapQuery(center,zoom)}}
             activeClassName='active'
             activeStyle={{ color: 'pink' }}
             exact={true}
             strict={true}
         > Map </NavLink>
-
-        <NavLink
-            to={{
-                type: "MAP",
-                query:geohash?{geohash:geohash}:{}
-            }}
-            activeClassName='active'
-            activeStyle={{ color: 'pink' }}
-            exact={true}
-            strict={true}
-        > MapQ </NavLink>
 
         <NavLink to="/user/123"
             activeClassName='active'
@@ -54,22 +43,35 @@ const App = ({ page, geohash, state, changeUser }) => {
 }
 App.propTypes = {
     page: PropTypes.string,
-    geohash: PropTypes.string,
+    center: PropTypes.string,
+    zoom: PropTypes.string,
     changeUser: PropTypes.func
 };
-const mapStateToProps = (state) => ({
-    page: state.page,
-    state: state,
-    geohash: (typeof state.location.query === 'undefined')?
-        state.location.payload.geohash : state.location.query.geohash,
-});
-const mapDispatchToProps = dispatch => ({
+const mapStateToProps = (state) => {
+    console.log("App state=", state);
+    return ({
+        page: state.page,
+        state: state,
+        center: state.map.center,
+        zoom: state.map.zoom
+/*
+        maybe I only need state.map* stuff here???
 
+        center: (typeof state.location.query === 'undefined')?
+            state.map.center : state.location.query.geohash,
+        zoom: (typeof state.location.query === 'undefined')?
+                state.map.zoom : state.location.query.zoom,
+
+                */
+    });
+}
+const mapDispatchToProps = dispatch => ({
+/*
      The action needs to have the full payload I think
      including geohash??? Same thing goes for any action
      so we should pull all actions out of these components
      and into an action.js file to look at them all in one place!
-
+*/
   changeUser: id => dispatch({ type: 'USER', payload: { id } })
 });
 
