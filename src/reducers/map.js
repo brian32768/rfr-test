@@ -19,16 +19,8 @@ export default (state = initialState, action = {}) => {
             }
             return state;
         case 'SETCENTER': {
-            const newState = {
-                center: action.payload,
-                zoom: state.zoom};
+            const newState = action.payload
             console.log("map reducer: SETCENTER", state, " =>", newState);
-            return newState; }
-        case 'SETZOOM': {
-            const newState = {
-                center: state.center,
-                zoom: action.payload};
-            console.log("map reducer: SETZOOM", state, " =>", newState);
             return newState;
         }
         default:

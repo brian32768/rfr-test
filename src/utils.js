@@ -11,13 +11,12 @@ export function getMapQuery(query) {
     }
 }
 
-export function setMapQuery(center, zoom) {
-    // Pack the reasonably named state settings into a compact query format
+export function setMapQuery(mapSettings) {
+    // Pack the reasonably named state settings into a compact querystring format
     const query = {}
-
     // In real life, I'd convert center coord to geohash here.
-    if (center)  query["g"] = center
-    if (zoom)    query["z"] = zoom
+    if (typeof mapSettings.center !== 'undefined') query["g"] = mapSettings.center
+    if (typeof mapSettings.zoom !== 'undefined')   query["z"] = mapSettings.zoom
 
     return query
 }

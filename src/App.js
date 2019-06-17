@@ -9,7 +9,7 @@ import { NavLink } from 'redux-first-router-link'
 // Import everything as an object so that we can look up a component using its name.
 import * as components from './components'
 
-const App = ({ page, center, zoom, state, changeUser }) => {
+const App = ({ page, mapCenter, mapZoom, changeUser }) => {
   const Component = components[page]
   return (
     <>
@@ -22,7 +22,7 @@ const App = ({ page, center, zoom, state, changeUser }) => {
         > Home </NavLink>
 
         <NavLink
-            to={{type: "MAP", query: setMapQuery(center,zoom)}}
+            to={{type: "MAP", query: setMapQuery(mapCenter,mapZoom)}}
             activeClassName='active'
             activeStyle={{ color: 'pink' }}
             exact={true}
@@ -47,24 +47,13 @@ App.propTypes = {
     zoom: PropTypes.string,
     changeUser: PropTypes.func
 };
-const mapStateToProps = (state) => {
-    console.log("App state=", state);
-    return ({
-        page: state.page,
-        state: state,
-        center: state.map.center,
-        zoom: state.map.zoom
-/*
-        maybe I only need state.map* stuff here???
+const mapStateToProps = (state) => ({
+    page: state.page,
 
-        center: (typeof state.location.query === 'undefined')?
-            state.map.center : state.location.query.geohash,
-        zoom: (typeof state.location.query === 'undefined')?
-                state.map.zoom : state.location.query.zoom,
+    mapCenter: state.map.center,
+    mapZoom: state.map.zoom
+});
 
-                */
-    });
-}
 const mapDispatchToProps = dispatch => ({
 /*
      The action needs to have the full payload I think

@@ -12,8 +12,7 @@ const Map = ({ center, setMapCenter, zoom, setMapZoom }) => {
     const [mapZoomInput, updateMapZoom] = useState('');
     const handleSubmit = (e) => {
         e.preventDefault();
-        setMapCenter(mapCenterInput);
-        setMapZoom(mapZoomInput);
+        setMapCenter(mapCenterInput, mapZoomInput);
     };
     return (
 <>
@@ -68,10 +67,8 @@ Map.propTypes = {
 const mapStateToProps = (state) => ({
     center: state.map.center,
     zoom:   state.map.zoom,
-//    geohash: (typeof state.location.query === 'undefined')? '' : state.location.query.geohash
 })
 const mapDispatchToProps = dispatch => ({
-    setMapCenter: center => dispatch({ type: 'SETCENTER', payload: center }),
-    setMapZoom:   zoom   => dispatch({ type: 'SETZOOM',   payload: zoom }),
+    setMapCenter: (center, zoom) => dispatch({ type: 'SETCENTER', payload: {center, zoom}})
 })
 export default connect(mapStateToProps, mapDispatchToProps)(Map);
