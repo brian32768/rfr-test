@@ -53,15 +53,8 @@ const mapStateToProps = (state) => ({
     center: state.map.center,
     zoom: state.map.zoom
 });
-
 const mapDispatchToProps = dispatch => ({
-/*
-     The action needs to have the full payload I think
-     including geohash??? Same thing goes for any action
-     so we should pull all actions out of these components
-     and into an action.js file to look at them all in one place!
-*/
-  changeUser: id => dispatch({ type: 'USER', payload: { id } })
+    changeUser: id => dispatch({ type: 'USER', payload: { id } })
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)

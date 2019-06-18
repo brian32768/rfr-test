@@ -7,7 +7,7 @@ const map = require('/assets/map.jpg');
 // Check this out for tips on using "Hooks" to handle forms.
 // https://rangle.io/blog/simplifying-controlled-inputs-with-hooks/
 
-const Map = ({ center, setMapCenter, zoom, setMapZoom }) => {
+const Map = ({ center, setMapCenter, zoom }) => {
     const [mapCenterInput, updateMapCenter] = useState('');
     const [mapZoomInput, updateMapZoom] = useState('');
     const handleSubmit = (e) => {
@@ -62,7 +62,6 @@ Map.propTypes = {
     center: PropTypes.string,
     setMapCenter: PropTypes.func,
     zoom: PropTypes.string,
-    setMapZoom: PropTypes.func,
 }
 const mapStateToProps = (state) => ({
     center: state.map.center,
